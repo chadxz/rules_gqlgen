@@ -1,0 +1,30 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+load("@rules_gqlgen//gqlgen:def.bzl", "gqlgen")
+
+gqlgen(
+    name = "gql",
+    base_importpath = "github.com/Silicon-Ally/rules_gqlgen/example/src",
+    gomod = "//:go.mod",
+    gosum = "//:go.sum",
+    schemas = [":schema.graphqls"],
+    visibility = ["//visibility:public"],
+)
+
+go_library(
+    name = "example_lib",
+    srcs = ["main.go"],
+    importpath = "github.com/Silicon-Ally/rules_gqlgen/example/src",
+    visibility = ["//visibility:private"],
+    deps = [
+        ":gql_generated",
+        ":gql_model",
+        "@com_github_99designs_gqlgen//graphql/handler",
+        "@com_github_99designs_gqlgen//graphql/playground",
+    ],
+)
+
+go_binary(
+    name = "example",
+    embed = [":example_lib"],
+    visibility = ["//visibility:public"],
+)
