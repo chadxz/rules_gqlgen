@@ -1,4 +1,4 @@
-module example
+module github.com/Silicon-Ally/rules_gqlgen/example
 
 go 1.19
 

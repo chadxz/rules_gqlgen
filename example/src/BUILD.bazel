@@ -16,8 +16,8 @@ go_library(
     importpath = "github.com/Silicon-Ally/rules_gqlgen/example/src",
     visibility = ["//visibility:private"],
     deps = [
-        ":gql_generated",
-        ":gql_model",
+        "//src:gql_generated",
+        "//src:gql_model",
         "@com_github_99designs_gqlgen//graphql/handler",
         "@com_github_99designs_gqlgen//graphql/playground",
     ],
